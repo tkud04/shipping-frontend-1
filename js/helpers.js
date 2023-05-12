@@ -199,3 +199,58 @@ const getTrackings = async () => {
    }
 
 }
+
+const updateResult = (dt) => {
+    console.log({dt})
+    $('#xf').val(dt?.tnum)
+    $('#sname').val(dt?.shipper?.name)
+    $('#sadd').val(dt?.shipper?.address)
+    $('#sphone').val(dt?.shipper?.phone)
+    $('#rname').val(dt?.receiver?.name)
+    $('#radd').val(dt?.receiver?.address)
+    $('#rphone').val(dt?.receiver?.phone)
+    $('#stype').val(dt?.stype)
+    $('#weight').val(dt?.weight)
+    $('#origin').val(dt?.origin)
+    $('#dest').val(dt?.dest)
+    $('#bmode').val(dt?.bmode)
+    $('#freight').val(dt?.freight)
+    $('#description').val(dt?.description)
+    $('#tracking-status').val(dt?.status)
+    $('#pickup-at').val(dt?.pickup_at)
+}
+
+
+const adminGetTracking = async (tnum) => {
+    let req = new Request(`${BASE_URL}/api/yyy?xf=${tnum}`)
+    let response = null
+
+    try{
+     response = await fetch(req)
+    }
+    catch(err){
+     console.log({err})
+    }
+
+   if(response.status === 200){
+     const responseJSON = await response.json()
+   
+     if(responseJSON?.status === 'ok'){
+        
+        if(responseJSON.data.length < 1){
+            alert('Tracking information not found, please try again')
+        }
+        else{
+          //show trackings div
+          let dt = responseJSON?.data
+          updateResult(dt)
+        }
+     }else{
+      alert('Tracking information not found, please try again')
+     }
+   }
+   else{
+    alert('We could not process your request, please try again in a few minutes')
+   }
+
+}

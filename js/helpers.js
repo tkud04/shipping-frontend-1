@@ -214,9 +214,12 @@ const updateResult = (dt) => {
     $('#origin').val(dt?.origin)
     $('#dest').val(dt?.dest)
     $('#bmode').val(dt?.bmode)
+    $('#bmode').niceSelect('update')
+    $('#mode').val(dt?.mode)
     $('#freight').val(dt?.freight)
     $('#description').val(dt?.description)
     $('#tracking-status').val(dt?.status)
+    $('#tracking-status').niceSelect('update')
     $('#pickup-at').val(dt?.pickup_at)
 }
 

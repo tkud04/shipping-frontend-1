@@ -70,6 +70,7 @@
     		<div class="row">
                 <div class="col-md-12">
                   <form id="add-tracking-form">
+                    <input type="hidden" id="xf" value=""/>
                     <div class="row">
                        <div class="mb-3 form-group col-md-12">
                         <h2 class="">Shipper Information</h2>
@@ -211,7 +212,7 @@
          
          const params = new URLSearchParams(location.search)
     let xf = params.get('xf')
-    console.log({xf})
+    
     if(xf.length > 0){
       adminGetTracking(xf)
     }
@@ -242,7 +243,7 @@
        alert("Please fill all required fields.")
       }
       else{
-    
+       console.log({xf})
        let fd = new FormData()
        fd.append('tnum',xf)
        fd.append('sname',sname)
